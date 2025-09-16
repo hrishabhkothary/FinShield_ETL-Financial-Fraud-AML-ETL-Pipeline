@@ -1,0 +1,167 @@
+🔹 Step 1: Clone the Project
+
+Open VS Code (or any terminal).
+
+Clone your GitHub repo:
+
+git clone https://github.com/YourUsername/FinShield_ETL.git
+
+
+Go into the project folder:
+
+cd FinShield_ETL
+
+🔹 Step 2: Create & Activate Virtual Environment (Windows)
+
+Create a virtual environment:
+
+python -m venv venv
+
+
+Activate it:
+
+# For PowerShell
+& .\venv\Scripts\Activate.ps1
+
+# For CMD
+.\venv\Scripts\activate.bat
+
+
+You should now see (venv) in your terminal.
+
+🔹 Step 3: Install Python Dependencies
+
+Make sure requirements.txt is present in the repo.
+
+Install packages:
+
+pip install --upgrade pip
+pip install -r requirements.txt
+
+
+Packages include: pandas, numpy, matplotlib, seaborn, snowflake-connector-python, python-dotenv, etc.
+
+🔹 Step 4: Configure Snowflake Credentials
+
+Open .env file (in root folder of the project).
+
+Add Snowflake credentials:
+
+SNOWFLAKE_USER=HRISHABH_KOTHARY
+SNOWFLAKE_PASSWORD=YourPasswordHere
+SNOWFLAKE_ACCOUNT=xy12345.ap-south-1
+SNOWFLAKE_WAREHOUSE=COMPUTE_WH
+SNOWFLAKE_DATABASE=FINSHIELD_DB
+SNOWFLAKE_SCHEMA=PUBLIC
+
+
+Notes:
+
+Replace each value with your own Snowflake account info.
+
+SNOWFLAKE_ACCOUNT can be found in your Snowflake web UI (top right → profile → account).
+
+Make sure the database/schema exists and you have permissions.
+
+🔹 Step 5: Generate Sample Transactions Data (Optional)
+
+If the repo has a data generator script (generate_synthetic.py):
+
+python src/generate_synthetic.py --rows 100000 --out data/transactions_sample.csv
+
+
+This creates 100k sample transactions.
+
+Make sure the output folder data/ exists.
+
+🔹 Step 6: Run ETL – Load Data to Snowflake
+
+Run the ETL loader (dataload_to_snowflake.py):
+
+python etl/dataload_to_snowflake.py --csv data/transactions_sample.csv --table TRANSACTIONS
+
+
+What happens:
+
+Connects to Snowflake using .env credentials.
+
+Auto-creates TRANSACTIONS table if it doesn’t exist.
+
+Loads CSV data into Snowflake using write_pandas.
+
+Confirm in Snowflake:
+
+SELECT COUNT(*) FROM TRANSACTIONS;
+
+
+You should see the number of rows in your CSV.
+
+🔹 Step 7: Run EDA & Modeling
+
+Navigate to analysis folder:
+
+cd analysis
+
+
+Run exploratory data analysis & modeling:
+
+python eda_and_model.py --input ../data/transactions_sample.csv --out results.csv
+
+
+What happens:
+
+Cleans the data.
+
+Performs EDA (summary statistics, correlations, anomaly detection).
+
+Runs ML modeling (fraud detection).
+
+Saves results to results.csv (optional).
+
+If you updated the script to have defaults, you can simply run:
+
+python eda_and_model.py
+
+🔹 Step 8: Visualize & Interpret Results
+
+Open Python notebook or script that reads results.csv or directly uses Python visualization:
+
+python analysis/visualize_results.py
+
+
+It will create charts with matplotlib/seaborn:
+
+Fraud trend per day
+
+High-risk merchant categories
+
+Transaction heatmaps
+
+🔹 Step 9: Optional – Use IICS or PowerCenter
+
+If the user has Informatica Cloud/IICS access:
+
+Import the ETL workflow (.xml or .iics project) from repo.
+
+Schedule daily data ingestion into Snowflake.
+
+Monitor job success/failures.
+
+PowerCenter (on-prem):
+
+Use provided mappings/workflows to connect legacy systems if needed.
+
+Python + Snowflake + SQL handle data cleaning, storage, modeling, and querying, while IICS/PowerCenter orchestrate enterprise-scale ETL pipelines.
+
+🔹 Step 10: Verify Everything Works
+
+In Snowflake, check data:
+
+SELECT * FROM TRANSACTIONS LIMIT 5;
+
+
+Check results.csv in analysis/ folder.
+
+Check generated visualizations.
+
+If all steps succeed → project is fully running locally!
