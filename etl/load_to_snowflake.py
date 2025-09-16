@@ -13,9 +13,9 @@ import pandas as pd
 
 def connect():
     return snowflake.connector.connect(
-        user=os.environ['HRISHABHKOTHARY'],
-        password=os.environ['Bloom#12345678'],
-        account=os.environ['LB01670'],
+        user=os.environ['SF_USERNAME'],
+        password=os.environ['SF_Password'],
+        account=os.environ['SF_ACCOUNT_Identifier'],
         warehouse=os.environ.get('COMPUTE_WH'),
         database=os.environ.get('FINSHIELD_DB'),
         schema=os.environ.get('PUBLIC'),
