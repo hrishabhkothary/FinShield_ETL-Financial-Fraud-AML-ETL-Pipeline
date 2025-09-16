@@ -29,9 +29,9 @@ def get_env(name, required=False, default=None):
     return val
 
 def connect():
-    user = get_env('HRISHABHKOTHARY', required=True)
-    password = get_env('Bloom#12345678', required=True)
-    account = get_env('LB01670', required=True)
+    user = get_env('SF_USERNAME', required=True)
+    password = get_env('SF_PASSWORD', required=True)
+    account = get_env('SF_ACCOUNT_IDENTIFIER', required=True)
     warehouse = get_env('COMPUTE_WH')
     database = get_env('FINSHIELD_DB')
     schema = get_env('PUBLIC')
