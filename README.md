@@ -42,7 +42,7 @@
 - **PaySim** (synthetic mobile money simulator) — designed for fraud detection and can be scaled to millions of rows.  
 - **IEEE-CIS Fraud Detection** (large, many features) — good for advanced feature engineering.
 
-(Links to these sources are referenced in the project documentation and in the accompanying ChatGPT reply.)
+
 
 ---
 
@@ -86,7 +86,7 @@
 
 ---
 
-## How to explain this project to an interviewer (script)
+## Explanation
 1. **Problem statement**: "FinShield_ETL simulates and processes large-scale transactional data to detect anomalous behavior and potential financial crime (fraud/AML)."
 2. **Architecture summary**: Explain ingestion (Informatica PowerCenter for on-prem batch; IICS for cloud), Snowflake as the analytical warehouse, and Python for analytics & modelling.
 3. **Tech-by-tech responsibilities**:
@@ -101,26 +101,12 @@
 5. **What you implemented**: walk through the repo files, show sample EDA plots, explain the features you engineered and why (e.g., transactions in last 1h, ratio to mean spend, device/location anomalies).
 6. **How it maps to business value**: Faster detection, fewer false positives, auditable transformations in Snowflake and Informatica.
 
----
-
-## Git steps (upload)
-1. Create GitHub repo `FinShield_ETL` in your account (via web UI).
-2. From local project folder:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit - FinShield_ETL scaffold"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/FinShield_ETL.git
-   git push -u origin main
-   ```
-3. Add CI (GitHub Actions) later for tests (optional).
 
 ---
 
 ## Notes & next steps
 - This scaffold contains Python code & docs. Real Informatica artifacts (exported mapplets/workflows) are not included since they require licensed tooling. Instead, step-by-step instructions are provided for building mappings and using Snowflake connectors.
-- Use public datasets from Kaggle and PaySim to seed/validate the models. See supporting links in the ChatGPT reply.
+- Use public datasets from Kaggle and PaySim to seed/validate the models.
 
 ---
 
